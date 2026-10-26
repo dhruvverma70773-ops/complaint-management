@@ -67,6 +67,16 @@ describe('Auth API', () => {
       });
       expect(res.statusCode).toBe(400);
     });
+
+    it('should reject registration when the name is missing', async () => {
+      const res = await request(app).post('/api/auth/register').send({
+        email: 'missing-name@example.com',
+        phone: '9876543214',
+        password: 'test1234',
+      });
+      expect(res.statusCode).toBe(400);
+      expect(res.body.success).toBe(false);
+    });
   });
 
   // ── POST /api/auth/login ────────────────────────────────────────────────────
@@ -127,6 +137,14 @@ describe('Auth API', () => {
     it('should return 401 when no token is provided', async () => {
       const res = await request(app).get('/api/auth/me');
       expect(res.statusCode).toBe(401);
+    });
+
+    it('should return 401 when an invalid token is provided', async () => {
+      const res = await request(app)
+        .get('/api/auth/me')
+        .set('Authorization', 'Bearer invalid-token');
+      expect(res.statusCode).toBe(401);
+      expect(res.body.success).toBe(false);
     });
   });
 });

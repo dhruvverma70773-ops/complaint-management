@@ -131,7 +131,7 @@ const Login = () => {
           <div className="mt-3 p-3 rounded" style={{ background: '#f0f9ff', border: '1px solid #bae6fd' }}>
             <p className="mb-1 small fw-semibold text-info">🔑 Demo Credentials:</p>
             <p className="mb-0 small text-muted">Admin: admin@cms.com / admin123</p>
-            <p className="mb-0 small text-muted">Citizen: rahul@citizen.com / citizen123</p>
+            <p className="mb-0 small text-muted">Citizen: dhruv@citizen.com / citizen123</p>
           </div>
 
           <p className="text-center mt-3 mb-0 small text-muted">

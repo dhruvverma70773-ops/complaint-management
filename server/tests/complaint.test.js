@@ -85,6 +85,19 @@ describe('Complaint API', () => {
         });
       expect(res.statusCode).toBe(400);
     });
+
+    it('should reject complaint when title is missing', async () => {
+      const res = await request(app)
+        .post('/api/complaints')
+        .set('Authorization', `Bearer ${citizenToken}`)
+        .send({
+          category: 'Water',
+          description: 'This complaint has a valid description length.',
+          location: 'Sector 1',
+        });
+      expect(res.statusCode).toBe(400);
+      expect(res.body.success).toBe(false);
+    });
   });
 
   // ── GET /api/complaints/my ────────────────────────────────────────────────
@@ -108,6 +121,38 @@ describe('Complaint API', () => {
         .get('/api/complaints')
         .set('Authorization', `Bearer ${adminToken}`);
       expect(res.statusCode).toBe(200);
+    });
+
+    // ── Admin dashboard routes ───────────────────────────────────────────────
+    describe('Admin API', () => {
+      it('should allow admin to view stats and citizen users', async () => {
+        const statsRes = await request(app)
+          .get('/api/admin/stats')
+          .set('Authorization', `Bearer ${adminToken}`);
+        const usersRes = await request(app)
+          .get('/api/admin/users')
+          .set('Authorization', `Bearer ${adminToken}`);
+
+        expect(statsRes.statusCode).toBe(200);
+        expect(statsRes.body.success).toBe(true);
+        expect(statsRes.body.stats).toEqual(
+          expect.objectContaining({
+            total: expect.any(Number),
+            totalUsers: 1,
+          })
+        );
+        expect(usersRes.statusCode).toBe(200);
+        expect(usersRes.body.count).toBe(1);
+        expect(usersRes.body.users[0]).not.toHaveProperty('password');
+      });
+
+      it('should return 403 when a citizen accesses admin routes', async () => {
+        const res = await request(app)
+          .get('/api/admin/stats')
+          .set('Authorization', `Bearer ${citizenToken}`);
+        expect(res.statusCode).toBe(403);
+        expect(res.body.success).toBe(false);
+      });
     });
 
     it('should return 403 when citizen tries to access all-complaints', async () => {

@@ -5,13 +5,14 @@
 //   - 10 sample complaints
 
 const dotenv    = require('dotenv');
+const path      = require('path');
 const mongoose  = require('mongoose');
 const bcrypt    = require('bcryptjs');
 const connectDB = require('../config/db');
 const User      = require('../models/User');
 const Complaint = require('../models/Complaint');
 
-dotenv.config({ path: '../.env' });
+dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 // ── Sample data ───────────────────────────────────────────────────────────────
 
@@ -24,8 +25,8 @@ const users = [
     role:     'admin',
   },
   {
-    name:     'Rahul Sharma',
-    email:    'rahul@citizen.com',
+    name:     'Dhruv Verma',
+    email:    'dhruv@citizen.com',
     phone:    '9876543210',
     password: 'citizen123',
     role:     'citizen',
@@ -181,7 +182,7 @@ const seed = async () => {
     console.log('\n✅ Database seeded successfully!\n');
     console.log('📧 Demo Credentials:');
     console.log('   Admin:   admin@cms.com   / admin123');
-    console.log('   Citizen: rahul@citizen.com / citizen123');
+    console.log('   Citizen: dhruv@citizen.com / citizen123');
     console.log('   Citizen: priya@citizen.com / citizen123\n');
 
     process.exit(0);

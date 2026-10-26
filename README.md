@@ -208,7 +208,7 @@ npm run dev      # starts frontend on http://localhost:5173
 | Role    | Email                  | Password    |
 |---------|------------------------|-------------|
 | Admin   | `admin@cms.com`        | `admin123`  |
-| Citizen | `rahul@citizen.com`    | `citizen123`|
+| Citizen | `dhruv@citizen.com`    | `citizen123`|
 | Citizen | `priya@citizen.com`    | `citizen123`|
 
 ---
@@ -220,7 +220,8 @@ npm run dev      # starts frontend on http://localhost:5173
 cd server
 npm test
 # Runs: tests/auth.test.js + tests/complaint.test.js
-# ✅ 18+ test cases covering auth, complaints, roles, validation
+# Uses mongodb-memory-server, so no real MongoDB connection is required
+# ✅ 24 integration test cases covering auth, complaints, roles, admin APIs, validation
 ```
 
 ### Frontend Tests (Vitest + React Testing Library)

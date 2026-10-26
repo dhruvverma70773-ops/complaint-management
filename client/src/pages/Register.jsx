@@ -90,8 +90,8 @@ const Register = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="cms-form" noValidate>
-            <Field id="name"    label="Full Name"    placeholder="Rahul Sharma" />
-            <Field id="email"   label="Email Address" type="email" placeholder="rahul@example.com" />
+            <Field id="name"    label="Full Name"    placeholder="Dhruv Verma" />
+            <Field id="email"   label="Email Address" type="email" placeholder="dhruv@example.com" />
             <Field id="phone"   label="Phone Number"  placeholder="9876543210" />
             <Field id="password" label="Password" type="password" placeholder="Min. 6 characters" />
             <Field
