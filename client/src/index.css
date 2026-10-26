@@ -1,0 +1,347 @@
+/* src/index.css
+   Global styles + custom CSS for the Complaint Management System
+   We use Bootstrap 5 for layout/components, and this file for custom styling
+*/
+
+/* ── Google Font ─────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── CSS Custom Properties (Design Tokens) ───────────────────────────────────── */
+:root {
+  --primary:       #4f46e5;  /* indigo */
+  --primary-dark:  #3730a3;
+  --primary-light: #e0e7ff;
+  --secondary:     #06b6d4;  /* cyan */
+  --success:       #10b981;
+  --warning:       #f59e0b;
+  --danger:        #ef4444;
+  --info:          #3b82f6;
+
+  /* Status colors */
+  --status-pending:     #f59e0b;
+  --status-in-progress: #3b82f6;
+  --status-resolved:    #10b981;
+  --status-rejected:    #ef4444;
+
+  --bg-dark:   #0f172a;
+  --bg-card:   #1e293b;
+  --bg-light:  #f8fafc;
+  --border:    #e2e8f0;
+  --text-muted: #94a3b8;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --radius:    12px;
+  --radius-sm: 8px;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-light);
+  color: #1e293b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Navbar ───────────────────────────────────────────────────────────────────── */
+.cms-navbar {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
+  box-shadow: 0 2px 20px rgba(79, 70, 229, 0.4);
+  padding: 0.8rem 0;
+}
+
+.cms-navbar .navbar-brand {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: white !important;
+}
+
+.cms-navbar .navbar-brand span {
+  background: rgba(255,255,255,0.2);
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-right: 6px;
+}
+
+.cms-navbar .nav-link {
+  color: rgba(255,255,255,0.85) !important;
+  font-weight: 500;
+  transition: color 0.2s;
+  padding: 0.4rem 0.8rem !important;
+  border-radius: 6px;
+}
+
+.cms-navbar .nav-link:hover,
+.cms-navbar .nav-link.active {
+  color: white !important;
+  background: rgba(255,255,255,0.15);
+}
+
+/* ── Stat Cards ───────────────────────────────────────────────────────────────── */
+.stat-card {
+  border: none;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-md);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 100px;
+  height: 100px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+}
+
+.stat-card-total     { background: linear-gradient(135deg, #4f46e5, #7c3aed); }
+.stat-card-pending   { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.stat-card-progress  { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+.stat-card-resolved  { background: linear-gradient(135deg, #10b981, #059669); }
+.stat-card-rejected  { background: linear-gradient(135deg, #ef4444, #dc2626); }
+.stat-card-users     { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+
+.stat-card .stat-number {
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.stat-card .stat-label {
+  font-size: 0.875rem;
+  opacity: 0.85;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-card .stat-icon {
+  font-size: 2.5rem;
+  opacity: 0.25;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+
+/* ── Status Badges ────────────────────────────────────────────────────────────── */
+.badge-pending     { background-color: var(--status-pending) !important;     color: white; }
+.badge-in-progress { background-color: var(--status-in-progress) !important; color: white; }
+.badge-resolved    { background-color: var(--status-resolved) !important;    color: white; }
+.badge-rejected    { background-color: var(--status-rejected) !important;    color: white; }
+
+.status-badge {
+  padding: 0.35em 0.75em;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  display: inline-block;
+}
+
+/* ── Priority Badges ──────────────────────────────────────────────────────────── */
+.priority-high   { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+.priority-medium { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+.priority-low    { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+
+/* ── Cards ────────────────────────────────────────────────────────────────────── */
+.cms-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.cms-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* ── Complaint ID ─────────────────────────────────────────────────────────────── */
+.complaint-id {
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+/* ── Timeline ─────────────────────────────────────────────────────────────────── */
+.timeline { position: relative; padding-left: 2rem; }
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary), var(--primary-light));
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -1.75rem;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+.timeline-dot.pending     { background: var(--status-pending); }
+.timeline-dot.in-progress { background: var(--status-in-progress); }
+.timeline-dot.resolved    { background: var(--status-resolved); }
+.timeline-dot.rejected    { background: var(--status-rejected); }
+
+/* ── Form ─────────────────────────────────────────────────────────────────────── */
+.cms-form .form-control:focus,
+.cms-form .form-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.2);
+}
+
+/* ── Page Header ──────────────────────────────────────────────────────────────── */
+.page-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 2.5rem 0;
+  margin-bottom: 2rem;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+/* ── Loading Spinner ──────────────────────────────────────────────────────────── */
+.full-page-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Auth Pages ───────────────────────────────────────────────────────────────── */
+.auth-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4f46e5 0%, #1e1b4b 100%);
+  display: flex;
+  align-items: center;
+}
+
+.auth-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.auth-logo {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-logo .logo-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Btn Primary Custom ───────────────────────────────────────────────────────── */
+.btn-cms {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 1.25rem;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-cms:hover {
+  opacity: 0.9;
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* ── Table ────────────────────────────────────────────────────────────────────── */
+.cms-table thead th {
+  background: var(--bg-light);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b;
+  border-bottom: 2px solid var(--border);
+}
+
+.cms-table tbody tr {
+  transition: background 0.15s;
+}
+
+.cms-table tbody tr:hover {
+  background: #f8faff;
+}
+
+/* ── Empty State ──────────────────────────────────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-muted);
+}
+
+.empty-state .empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.4;
+}
+
+/* ── Animations ───────────────────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .stat-card .stat-number { font-size: 2rem; }
+  .auth-card { padding: 1.5rem; }
+  .page-header { padding: 1.5rem 0; }
+}
